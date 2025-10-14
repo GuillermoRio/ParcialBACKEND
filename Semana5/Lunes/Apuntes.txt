@@ -1,0 +1,15 @@
+En typeScript todos son variables
+API recibe peticiones HTTP
+Esta peticion empieza con un dominio/IP HTTP
+Luego recibe un endpoint
+y la API devuelve un objeto Json
+
+CORS Cross-Origin Resource sharing
+(para laboratorio pero nunca se utilizara para cuando se publique)
+
+Llamadas Get: Da información
+	Post: Creas información
+	put: Actualiza
+	Delete: Borrar
+
+Será montar una api y utilizar el axios para probarla.
