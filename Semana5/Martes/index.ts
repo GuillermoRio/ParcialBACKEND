@@ -55,6 +55,7 @@ app.get("/teams", (req, res) => {
 app.get("/teams/:id", (req, res) => {
     const id = req.params.id;
     res.json(teams.at(Number(id)-1));//El send es lo mismo pero no lo pasa como JSON
+    //Hacerlo con find
 });
 
 app.post("/teams", (req, res)=>{
