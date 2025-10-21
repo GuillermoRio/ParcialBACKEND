@@ -34,21 +34,21 @@ const validateDLData = (data: any) => {
   if (typeof filmName !== "string" || filmName.trim().length < 2)
     return "El nombre debe ser una cadena con al menos 2 caracteres.";
 
-  if (rotationType !== "CAV" || "CLV") {
+  /*if (rotationType !== "CAV" || "CLV") {
     return "La ciudad debe ser string y tener al menos 2 caracteres";
-  }
+  }*/
 
   if (typeof region !== "string" || region.trim().length < 2) {
     return "Las regiones deben ser string";
   }
 
-  if (typeof lengthMinutes !== "number"){
+  /*if (typeof lengthMinutes !== "number"){
     return "Los lengMinutes deben ser Number";
   }
 
   if (videoFormat !== "NTSC" || "PAL"){
     return "Los videoFormat deben ser String";
-  }
+  }*/
 
   return null;
 };
@@ -99,9 +99,9 @@ app.listen(port, ()=>{
     console.log("Servidor en http://localhost:" + port);
 });
 
-const getTeams = async () => {
+const getLD = async () => {
     try{
-        const team = (await axios.get("http://localhost:3000/teams")).data;
+        const team = (await axios.get("http://localhost:3000/ld")).data;
 
         return team;
     }catch(error){
@@ -113,11 +113,11 @@ const getTeams = async () => {
     }
 }
 
-const getTeambyId = async (id: number) => {
+const getSONGDL = async (id: number) => {
     try{
-        const team = (await axios.get("http://localhost:3000/teams/" + id )).data;
+        const DL = (await axios.get("http://localhost:3000/ld/" + id )).data;
 
-        return team;
+        return DL;
     }catch(error){
         if(axios.isAxiosError(error)){
             console.log("Axios error" + error.message);
@@ -127,11 +127,11 @@ const getTeambyId = async (id: number) => {
     }
 }
 
-const postTeam = async (newTeam: LD ) => {
+const postld = async (newLd: LD ) => {
     try{
-        const team = (await axios.post("http://localhost:3000/teams", newTeam )).data;
+        const newld = (await axios.post("http://localhost:3000/ld", newLd )).data;
         
-        return team;
+        return newld;
     }catch(error){
         if(axios.isAxiosError(error)){
             console.log("Axios error" + error.message);
@@ -142,7 +142,7 @@ const postTeam = async (newTeam: LD ) => {
 }
 const delTeam = async (id: Number) => {
     try{
-        const team = (await axios.delete("http://localhost:3000/teams/" + id)).data;
+        const team = (await axios.delete("http://localhost:3000/ld/" + id)).data;
         
         return team;
     }catch(error){
@@ -155,18 +155,21 @@ const delTeam = async (id: Number) => {
 }
 
 const testAPI = async () => {
-    const myTeam0 = getTeams();
-    console.log(await myTeam0)
+    const myDLAll1 = getLD();
+    console.log(await myDLAll1)
 
-    postTeam({ id: 3, filmName: "IE", rotationType: "CLV", region: "dud", lengthMinutes: 17, videoFormat: "PAL" },);
+    postld({ id: 3, filmName: "IE", rotationType: "CLV", region: "dud", lengthMinutes: 17, videoFormat: "PAL" },);
 
-    const myTeam1 = getTeams();
-    console.log(await myTeam1)
+    const myDL1 = getSONGDL(1);
+    console.log(await myDL1)
 
-    delTeam(1);
+    const myDLAll2 = getLD();
+    console.log(await myDLAll2)
 
-    const myTeam2 = getTeams();
-    console.log(await myTeam2)
+    delTeam(3);
+
+    const myDLAll3 = getLD();
+    console.log(await myDLAll3)
 }
 
 testAPI();
